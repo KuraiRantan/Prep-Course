@@ -10,6 +10,7 @@ function deObjetoAmatriz(objeto){
       C: 3
     }) ➞ [["D", 1], ["B", 2], ["C", 3]]*/
   //Escribe tu código aquí
+  return Object.entries(objeto);
 }
 
 
@@ -18,6 +19,12 @@ function numberOfCharacters(string) {
   //en formato par clave-valor.
   //Ej: Recibe ---> "adsjfdsfsfjsdjfhacabcsbajda" || Devuelve ---> { a: 5, b: 2, c: 2, d: 4, f: 4, h:1, j: 4, s: 5 } 
   //Escribe tu código aquí
+  let obj = {};
+  for(let letra of string){
+
+    obj[letra] = (obj[letra]) ? obj[letra] + 1 : 1;
+  }
+  return obj;
 }
 
 
@@ -26,6 +33,15 @@ function capToFront(s) {
   //al principio de la palabra.
   //Ejemplo: soyHENRY -> HENRYsoy
   //Escribe tu código aquí
+  let letras = [[], []];
+  for(let letra of s){
+    if(letra === letra.toUpperCase()){
+      letras[0].push(letra);
+    }else{
+      letras[1].push(letra);
+    }
+  }
+  return letras[0].concat(letras[1]).join('');
 }
 
 
@@ -35,6 +51,9 @@ function asAmirror(str) {
   //pero con cada una de sus palabras invertidas, como si fuera un espejo.
   //Ej: Recibe ---> "The Henry Challenge is close!" || Devuelve ---> "ehT yrneH egnellahC si !esolc"
   //Escribe tu código aquí
+  str = str.split(' ');
+  str = str.map((valor) => [...valor].reverse().join(''))
+  return str.join(' ');
 } 
 
 
@@ -43,6 +62,8 @@ function capicua(numero){
   //La misma debe retornar: "Es capicua" si el número se número que se lee igual de 
   //izquierda a derecha que de derecha a izquierda. Caso contrario retorna "No es capicua"
   //Escribe tu código aquí
+  numero = String(numero);
+  return (numero === ([...numero].reverse().join(''))) ? 'Es capicua' : 'No es capicua';
 }
 
 
@@ -50,6 +71,7 @@ function deleteAbc(cadena){
   //Define una función que elimine las letras "a", "b" y "c" de la cadena dada 
   //y devuelva la versión modificada o la misma cadena, en caso de contener dichas letras.
   //Escribe tu código aquí
+  return [...cadena].filter(valor => (valor !== 'a' && valor !== 'b' && valor !== 'c')).join('');
 }
 
 
@@ -57,15 +79,33 @@ function sortArray(arr) {
   //La función recibe una matriz de strings. Ordena la matriz en orden creciente de longitudes de cadena
   //Ej: Recibe ---> ["You", "are", "beautiful", "looking"] || Devuelve ---> [“You", "are", "looking", "beautiful"]
   //Escribe tu código aquí
+    for(let i=1; i < arr.length; i++){
+        for(let j=0; j < arr.length -1; j++){
+            if(arr[j].length > arr[j+1].length){
+                let temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
+        }
+    }
+    return arr;
 }
-
 
 function buscoInterseccion(arreglo1, arreglo2){
   //Existen dos arrays, cada uno con 5 números. A partir de ello, escribir una función que permita 
   //retornar un nuevo array con la intersección de ambos elementos. (Ej: [4,2,3] unión [1,3,4] = [3,4].
   //Si no tienen elementos en común, retornar un arreglo vacío.
   //Aclaración: los arreglos no necesariamente tienen la misma longitud
-  //Escribe tu código aquí  
+  //Escribe tu código aquí
+  let arreglo3 = [];
+  for(let a of arreglo1){
+    for(let b of arreglo2){
+      if(a === b && !arreglo3.includes(a)){
+        arreglo3.push(a);
+      }
+    }
+  }
+  return arreglo3;
 }
 
 
